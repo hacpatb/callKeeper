@@ -82,7 +82,7 @@ namespace callKeeper
             return listNumber;
         }
 
-        static public bool saveRecordCall()
+        static public bool saveRecordCall(string disk)
         {
             DateTime now = DateTime.Now.AddDays(0);
             int year = now.Year;
@@ -96,9 +96,8 @@ namespace callKeeper
                     string conStr = String.Format(@"https://mrecord.mts.ru/api/v2/recs/{0}/{1}-{2:00}-{3:00}T00:00:00/{1}-{2:00}-{3:00}T23:59:59", j, year, month, day);
                     var rawListCalls = LoadHttpPageWithBasicAuthentication(conStr, "9122307669", "vhnoWWlPHA");
                     ListCalls ListCalls = JsonConvert.DeserializeObject<ListCalls>(rawListCalls);
-
-                    string path = String.Format(@"F:\CallsLibrary\{0}\{1:00}\{2}\", year, month, phoneNumber);
-
+                    //string path = String.Format(@"F:\CallsLibrary\{0}\{1:00}\{2}\", year, month, phoneNumber);
+                    string path = $@"{disk}CallsLibrary\{year}\{month:00}\{phoneNumber}\";
                     if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);

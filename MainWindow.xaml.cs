@@ -13,11 +13,21 @@ namespace callKeeper
     {
         public MainWindow()
         {
-           // InitializeComponent();
-            callKeeper.cWebRequest.saveRecordCall();
-            this.Close();
-        }
+            // InitializeComponent();
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length <= 1) {
+                MessageBox.Show("Не задан параметр для запуска", "Параметр", MessageBoxButton.OK, MessageBoxImage.Warning);
+                this.Close();
+            }
+            else
+            {
+                callKeeper.cWebRequest.saveRecordCall(args[1]);
+                this.Close();
+            }
+            
 
+            
+        }
         private void button_Click(object sender, RoutedEventArgs e)
         {
 
